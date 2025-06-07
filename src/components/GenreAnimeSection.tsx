@@ -23,7 +23,7 @@ export default function GenreAnimeSection() {
   }, [selectedGenre]);
   return (
     <section className="max-w-5xl py-16">
-      <h2 className="text-3xl font-anime text-center mb-6">explore by Genre</h2>
+      <h2 className="text-5xl font-anime text-center mb-6">explore by Genre</h2>
 
       <GenreSelector selected={selectedGenre} onSelect={setSelectedGenre} />
 
