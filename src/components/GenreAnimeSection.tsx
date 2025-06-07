@@ -12,7 +12,7 @@ export default function GenreAnimeSection() {
 
   useEffect(() => {
     setLoading(true);
-    get("/top/anime", `genres=${selectedGenre}&filter=bypopularity&limit=10`)
+    get("/anime", `genres=${selectedGenre}&limit=10&order_by=score&sort=desc`)
       .then((res) => {
         if (res.status === 200) {
           const paginated = res.data as PaginatedResponse<Anime>;
@@ -21,7 +21,7 @@ export default function GenreAnimeSection() {
       })
       .finally(() => setLoading(false));
   }, [selectedGenre]);
-
+  console.log(animes);
   return (
     <section className="max-w-5xl py-16">
       <h2 className="text-3xl font-anime text-center mb-6">explore by Genre</h2>
@@ -34,9 +34,9 @@ export default function GenreAnimeSection() {
         </div>
       ) : (
         <div className="max-w-sm mx-auto md:max-w-5xl overflow-x-auto scrollbar-hide">
-          <div className="flex gap-4 px-2">
+          <div className="flex gap-4">
             {animes.map((anime) => (
-              <div key={anime.mal_id} className=" snap-start">
+              <div key={anime.mal_id} className="min-w-52 snap-start">
                 <AnimeCard anime={anime} />
               </div>
             ))}

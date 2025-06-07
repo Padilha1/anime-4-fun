@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 const api_url = "https://api.jikan.moe/v4";
 const etagCache = new Map<string, string>();
@@ -29,8 +30,12 @@ export const get = async (endpoint: string, params?: string) => {
   } catch (error) {
     const err = error as AxiosError;
     if (err.response?.status === axios.HttpStatusCode.NotModified) {
-      alert("Conteúdo não modificado (304)");
+      toast.success("Conteúdo não modificado (304)");
       return { status: 304, data: "Not Modified" };
+    }
+    if (err.response?.status === axios.HttpStatusCode.TooManyRequests) {
+      console.error("Muitas requisições, tente novamente mais tarde.");
+      return { status: 429, data: "Too Many Requests" };
     }
 
     throw err;
