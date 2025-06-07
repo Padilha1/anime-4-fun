@@ -12,7 +12,10 @@ export default function GenreAnimeSection() {
 
   useEffect(() => {
     setLoading(true);
-    get("/anime", `genres=${selectedGenre}&limit=10&order_by=score&sort=desc`)
+    get(
+      "/anime",
+      `genres=${selectedGenre}&limit=10&type=tv&order_by=score&sort=desc`
+    )
       .then((res) => {
         if (res.status === 200) {
           const paginated = res.data as PaginatedResponse<Anime>;
