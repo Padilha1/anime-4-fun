@@ -21,7 +21,6 @@ export default function GenreAnimeSection() {
       })
       .finally(() => setLoading(false));
   }, [selectedGenre]);
-  console.log(animes);
   return (
     <section className="max-w-5xl py-16">
       <h2 className="text-3xl font-anime text-center mb-6">explore by Genre</h2>
